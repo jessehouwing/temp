@@ -7,3 +7,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "# WOOT! 🚀" >> $env:GITHUB_STEP_SUMMARY
+        shell: pwsh
