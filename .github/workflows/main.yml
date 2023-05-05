@@ -18,7 +18,10 @@ jobs:
     strategy:
       matrix: ${{fromJson(needs.init.outputs.matrix)}}
     steps:
-    - run: echo ${{ matrix }}
+    - run: echo "$var"
+      env:
+        var: ${{ matrix }}
+      shell: pwsh
   merge:
     needs: scatter
     runs-on: ubuntu-latest
