@@ -16,13 +16,14 @@ jobs:
     needs: init
     runs-on: ubuntu-latest
     strategy:
-      matrix: ${{fromJson(needs.init.outputs.matrix)}}
+      matrix: 
+        job: ${{fromJson(needs.init.outputs.matrix)}}
     steps:
     - name: "Print matrix"
       run: |
-         echo "$var"
+         echo "$VAR"
       env:
-        var: ${{ matrix }}
+        VAR: "${{ matrix.job }}"
       shell: pwsh
   merge:
     needs: scatter
