@@ -10,7 +10,7 @@ jobs:
     steps:
     - id: set-matrix
       run: |
-         write-output "matrix={jobs: [1,2,3]}" >> $env:GITHUB_OUTPUT
+         write-output "matrix={job: [1,2,3]}" >> $env:GITHUB_OUTPUT
       shell: pwsh
   scatter:
     needs: init
