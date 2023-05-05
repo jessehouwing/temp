@@ -10,7 +10,25 @@ jobs:
     steps:
     - id: set-matrix
       run: |
-         write-output "matrix={job: [1,2,3]}" >> $env:GITHUB_OUTPUT
+          $x = @{
+            job= @(
+              @{
+                var1="a"
+                var2="b"
+              },
+              @{
+                var1="c"
+                var2="d"
+              }
+            )
+          }
+
+          $x.job += @{ 
+            var1="e" 
+            var2="f" 
+          }
+
+          write-output "matrix=$(convertto-Json $x -Compress)" >> $env:GITHUB_OUTPUT
       shell: pwsh
   scatter:
     needs: init
