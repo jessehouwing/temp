@@ -38,12 +38,12 @@ jobs:
     steps:
     - name: "Print matrix"
       env:
-        VAR: ${{ matrix.job }}
+        JOBVAR: ${{ matrix.job }}
         JSON: ${{ toJson(matrix) }}
       shell: pwsh
       run: |
           echo $env:JSON
-          echo $env:VAR
+          echo $env:JOBVAR
   merge:
     needs: scatter
     runs-on: ubuntu-latest
