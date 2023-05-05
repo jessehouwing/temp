@@ -16,8 +16,7 @@ jobs:
     needs: init
     runs-on: ubuntu-latest
     strategy:
-      matrix: 
-        job: ${{fromJson(needs.init.outputs.matrix)}}
+      matrix: ${{fromJson(needs.init.outputs.matrix)}}
     steps:
     - name: "Print matrix"
       run: |
