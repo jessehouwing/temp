@@ -18,8 +18,9 @@ jobs:
     strategy:
       matrix: ${{fromJson(needs.init.outputs.matrix)}}
     steps:
-    - run: |
-          echo "$var"
+    - name: "Print matrix"
+      run: |
+         echo "$var"
       env:
         var: ${{ matrix }}
       shell: pwsh
