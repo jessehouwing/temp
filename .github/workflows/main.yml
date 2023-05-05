@@ -39,6 +39,7 @@ jobs:
     - name: "Print matrix"
       shell: pwsh
       run: |
+          echo '${{ matrix.job.var1 }}'
           echo '${{ toJson(matrix) }}'
   merge:
     needs: scatter
