@@ -37,13 +37,13 @@ jobs:
       matrix: ${{fromJson(needs.init.outputs.matrix)}}
     steps:
     - name: "Print matrix"
-      run: |
-          echo $env:JSON
-          echo $env:VAR
       env:
         VAR: ${{ matrix.job }}
         JSON: ${{ toJson(matrix) }}
       shell: pwsh
+      run: |
+          echo $env:JSON
+          echo $env:VAR
   merge:
     needs: scatter
     runs-on: ubuntu-latest
