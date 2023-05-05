@@ -38,6 +38,7 @@ jobs:
     steps:
     - name: "Print matrix"
       run: |
+         echo ${{ toJson(matrix) }}
          echo "$VAR"
       env:
         VAR: "${{ matrix.job }}"
