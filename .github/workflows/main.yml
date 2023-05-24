@@ -34,5 +34,5 @@ jobs:
       run: |
           echo $env:scope
       env:
-        scope: toJson(env)
+        scope: ${{ toJson(env) }}
       shell: pwsh
