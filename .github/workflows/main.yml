@@ -29,3 +29,9 @@ jobs:
           echo "PORT NUMBER: ${{ steps.split.outputs.port }} and $($env:port)"    
       shell: pwsh
       env: ${{ steps.split.outputs }}
+      
+    - name: Dump the env scope
+      run: |
+          echo $env:scope
+      env:
+        scope: toJson(env)
