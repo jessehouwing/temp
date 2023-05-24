@@ -12,7 +12,7 @@ jobs:
          $values = $key_value -split " "
          foreach ($value in $values)
          {
-           if ($value -match "*password*")
+           if ($value -like "*password*")
            {
              $secret = ($value.split("=",2))[1]
              echo "::add-mask::$secret"
