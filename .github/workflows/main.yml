@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - run: |
-         $values = $key_value -split " "
+         $values = $env:key_value -split " "
          foreach ($value in $values)
          {
            if ($value -like "*password*")
