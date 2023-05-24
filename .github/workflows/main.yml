@@ -35,3 +35,4 @@ jobs:
           echo $env:scope
       env:
         scope: toJson(env)
+      shell: pwsh
