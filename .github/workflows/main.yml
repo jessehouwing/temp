@@ -28,5 +28,4 @@ jobs:
     - run: |
           echo "PORT NUMBER: ${{ env.port }} and $($env:port)"    
       shell: pwsh
-      env:
-        port: ${{ env.port }}
+      env: ${{ toJson(env) }}
