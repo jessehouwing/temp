@@ -4,45 +4,27 @@ on: workflow_dispatch
 
 jobs:
   init:
+    env:
+      key_value: "deploy_path=C:\\inetpub\\wwwroot\\tss.qa port=8814 app_name=Signup-qa debug=true deploy_password=password deploy_user="    
     runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
-    - id: set-matrix
-      run: |
-          $x = @{
-            job= @(
-              @{
-                var1="a"
-                var2="b"
-              },
-              @{
-                var1="c"
-                var2="d"
-              }
-            )
-          }
-
-          $x.job += @{ 
-            var1="e" 
-            var2="f" 
-          }
-
-          write-output "matrix=$(convertto-Json $x -Compress)" >> $env:GITHUB_OUTPUT
+    - run: |
+         $values = $key_value -split " "
+         foreach ($value in $values)
+         {
+           if ($value -match "*password*")
+           {
+             $secret = ($value.split("=",2))[1]
+             echo "::add-mask::$secret"
+           }
+           echo $value
+           echo $value >> $env:GITHUB_ENV
+         }
+      id: split
       shell: pwsh
-  scatter:
-    needs: init
-    runs-on: ubuntu-latest
-    strategy:
-      matrix: ${{fromJson(needs.init.outputs.matrix)}}
-    steps:
-    - name: "Print matrix"
+      env:
+        key_value: ${{ env.key_value }}
+
+    - run: |
+          echo "PORT NUMBER: ${{ env.port }} and $($env:port)"    
       shell: pwsh
-      run: |
-          echo '${{ matrix.job.var1 }}'
-          echo '${{ toJson(matrix) }}'
-  merge:
-    needs: scatter
-    runs-on: ubuntu-latest
-    steps:
-    - run: echo "DONE!"
