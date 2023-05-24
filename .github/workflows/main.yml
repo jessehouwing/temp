@@ -5,7 +5,7 @@ on: workflow_dispatch
 jobs:
   init:
     env:
-      key_value: "deploy_path=C:\\inetpub\\wwwroot\\tss.qa port=8814 app_name=Signup-qa debug=true deploy_password=password deploy_user="    
+      key_value: "deploy_path=C:\\inetpub\\wwwroot\\tss.qa port=8814 app_name=Signup-qa debug=true deploy_password=FHSGDSJJD deploy_user="    
     runs-on: ubuntu-latest
     steps:
     - run: |
