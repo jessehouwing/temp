@@ -18,7 +18,7 @@ jobs:
              echo "::add-mask::$secret"
            }
            echo $value
-           echo $value >> $env:GITHUB_ENV
+           echo $value >> $env:GITHUB_OUTPUT
          }
       id: split
       shell: pwsh
@@ -26,6 +26,6 @@ jobs:
         key_value: ${{ env.key_value }}
 
     - run: |
-          echo "PORT NUMBER: ${{ env.port }} and $($env:port)"    
+          echo "PORT NUMBER: ${{ steps.split.outputs.port }} and $($env:port)"    
       shell: pwsh
-      env: ${{ env }}
+      env: ${{ steps.split.outputs }}
