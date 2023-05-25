@@ -1,38 +1,10 @@
-name: test
-
-on: workflow_dispatch
-
+name: ci
+on:
+  pull_request:
+    paths:
+      - '*.md'
 jobs:
-  init:
-    env:
-      key_value: "deploy_path=C:\\inetpub\\wwwroot\\tss.qa port=8814 app_name=Signup-qa debug=true deploy_password=FHSGDSJJD deploy_user="    
+  build:
     runs-on: ubuntu-latest
     steps:
-    - run: |
-         $values = $env:key_value -split " "
-         foreach ($value in $values)
-         {
-           if ($value -like "*password*")
-           {
-             $secret = ($value.split("=",2))[1]
-             echo "::add-mask::$secret"
-           }
-           echo $value
-           echo $value >> $env:GITHUB_OUTPUT
-         }
-      id: split
-      shell: pwsh
-      env:
-        key_value: ${{ env.key_value }}
-
-    - run: |
-          echo "PORT NUMBER: ${{ steps.split.outputs.port }} and $($env:port)"    
-      shell: pwsh
-      env: ${{ steps.split.outputs }}
-      
-    - name: Dump the env scope
-      run: |
-          echo $env:scope
-      env:
-        scope: ${{ toJson(env) }}
-      shell: pwsh
+    - uses: actions/checkout@v3
