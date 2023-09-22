@@ -30,4 +30,4 @@ jobs:
         run: echo make my script work!
 
       - run: |
-          Try again!
+          echo ARGH! MAKE IT WORK!
