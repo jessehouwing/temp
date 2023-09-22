@@ -29,5 +29,5 @@ jobs:
       - name: Run a one-line script
         run: echo make my script work!
 
-      run: |
-        run some more
+      - run: |
+          Try again!
